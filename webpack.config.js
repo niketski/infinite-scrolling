@@ -1,6 +1,6 @@
 const path = require('path');
 const entry = {
-    app: './src/index.js'
+    app: ['babel-polyfill', './src/index.js']
 }
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +10,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: entry,
-    devtool: 'inline-source-map',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -19,10 +18,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.s?css$/,
+                test: /\.(scss|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader, 
                     'css-loader',
+                    'postcss-loader',
                     'sass-loader'
                 ]
             },
@@ -32,7 +32,8 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: './images',
+                        outputPath: 'images/',
+                        publicPath: 'images/',
                         esModule: false
                     }
                 }
@@ -43,7 +44,8 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ["@babel/preset-env"],
+                        plugins: ["@babel/plugin-transform-async-to-generator"]
                     }
                 }
             },
@@ -52,7 +54,7 @@ module.exports = {
                 loader: 'html-loader'
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)/,
+                test: /\.(woff|woff2|eot|ttf)$/,
                 loader: 'url-loader',
                 options: {
                     name: '[name].[ext]',

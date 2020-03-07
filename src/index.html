@@ -6,16 +6,68 @@
     <title>Image Gallery</title>
 </head>
 <body>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>hello world</h1>
-                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                    <img src="./images/sample.jpg" alt="hello world" class="img-responsive">
+    <!-- banner -->
+    <section class="main-banner">
+        <div class="jumbotron text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="./images/dog-main.png" alt="Dog Logo" class="dog-logo"/>
+                        <div class="banner-text">
+                            <h1 class="display-4 text-uppercase">Dogs</h1>
+                            <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- end banner -->
+
+    <!-- custom search bar -->
+    <section class="search-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="#">
+
+                        <div class="search-bar-dropdown-holder" id="search-bar-dropdown-holder">
+
+                            <div class="input-group input-group-lg mb-3">
+                                <input  autocomplete="off" id="search-breed-input" type="text" class="form-control" placeholder="Search Breed" aria-label="Search Breed" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><em class="fa fa-paw" aria-hidden="true"></em></button>
+                                </div>
+                            </div>
+
+                            <div class="search-bar-backdrop"></div>
+                            <div class="search-bar-dropdown">
+                               <div class="list-group">
+                                   <button href="#" class="list-group-item list-group-item-action"><span>Chiuaua</span></button>
+                                   <button href="#" class="list-group-item list-group-item-action"><span>Shitzu</span></button>
+                                   <button href="#" class="list-group-item list-group-item-action"><span>Pug</span></button>
+                                   <button href="#" class="list-group-item list-group-item-action"><span>Great Dane</span></button>
+                               </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end custom search bar -->
+
+    <!-- dog navigation -->
+    <!-- <div class="dog-tabs">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item"><a href="#" class="nav-link active">Active</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">test1</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">test2</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">test3</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">test4</a></li>
+        </ul>
+    </div> -->
+
 </body>
 </html>
