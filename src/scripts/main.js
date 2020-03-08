@@ -19,7 +19,11 @@ import DogApi from './DogApi';
     }
 
     class App {
-    
+        
+        constructor() {
+            this.loader = document.querySelector('.gallery-loader');
+        }
+
         searchBreed(){
             const inputField       = document.querySelector('#search-breed-input'); // input field
             const dropdownHolder   = document.querySelector('#search-bar-dropdown-holder'); // dropdown wrapper
@@ -40,6 +44,8 @@ import DogApi from './DogApi';
 
             dogApi.getImages(12)
             .then(images => {
+                // hide loader
+                this.loader.classList.add('hidden');
                 appendGallery(images, '.gallery-list');
             })
            .catch(error => {
@@ -54,8 +60,13 @@ import DogApi from './DogApi';
             if(!atTheBottom) {
                 return;
             }
+            
+            this.loader.classList.remove('hidden');
 
-            this.loadGallery();
+            // just adding 800ms delay to load the gallery
+            setTimeout(()=> {
+                this.loadGallery();
+            }, 800);
             
             return;
 
