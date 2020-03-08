@@ -3,6 +3,21 @@ import DogApi from './DogApi';
 (function(){
     const dogApi = new DogApi();
     
+    // global functions
+    function appendGallery(data, container) {
+        const urlArray = data.message;
+        let html = '';
+
+        for (let src of urlArray) {
+            html += `
+            <div class="gallery-item">
+                <canvas width="240" height="240" style="background-image:url('${src}');"></canvas>
+            </div>`;
+        }
+
+        document.querySelector(container).insertAdjacentHTML('beforeend', html);
+    }
+
     class App {
     
         searchBreed(){
@@ -21,24 +36,35 @@ import DogApi from './DogApi';
                 dropdownHolder.classList.remove('active');
             });
         }
+        loadGallery() {
 
-        loadRandomBreeds() {
-
-            dogApi.getRandomImages(4)
+            dogApi.getImages(12)
             .then(images => {
-
-            console.log(images);
-
+                appendGallery(images, '.gallery-list');
             })
            .catch(error => {
-               console.log('Invalid url');
+               console.error('Invalid url');
            });
+        }
+
+        loadGalleryAtTheBottom () {
+            let offset = 1000;
+            let atTheBottom = window.pageYOffset + window.innerHeight == document.body.offsetHeight;
+            
+            if(!atTheBottom) {
+                return;
+            }
+
+            this.loadGallery();
+            
+            return;
+
         }
 
         initialize() {
             console.log('app is the app is ready');
             this.searchBreed();
-            this.loadRandomBreeds();
+            this.loadGallery();
         }
 
    }
@@ -49,7 +75,11 @@ import DogApi from './DogApi';
     // run functions on load
     window.addEventListener('load', function() {
         app.initialize();
+    });
 
+    // run functions on window scroll
+    window.addEventListener('scroll', function() {
+        app.loadGalleryAtTheBottom();
     });
 
 })();
