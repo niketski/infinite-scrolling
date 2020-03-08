@@ -15,7 +15,11 @@ export default class DogApi {
 
         // return random images if breed was not specified
         url = `${this.baseUrl}/breeds/image/random/${imageCount}`;
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> fa9a6717fd0fddb9a1ded036762da8e75396a26a
         return url;
     }
 
