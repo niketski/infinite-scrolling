@@ -2,6 +2,7 @@ export default class DogApi {
 
     constructor() {
         this.baseUrl = 'https://dog.ceo/api';
+        this.breedsUrl = `${this.baseUrl}/breeds/list`;
     }
 
     getImagesUrl(imageCount, breed) {
@@ -29,6 +30,17 @@ export default class DogApi {
     
         return data;
         
+    }
+
+    async getBreedsList() {
+        const response = await fetch(this.breedsUrl);
+        const data     = await response.json();
+
+        if(!response.ok) {
+            return Promise.reject(data)
+        }
+
+        return data;
     }
     
 }

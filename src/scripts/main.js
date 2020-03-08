@@ -28,7 +28,8 @@ import DogApi from './DogApi';
             const inputField       = document.querySelector('#search-breed-input'); // input field
             const dropdownHolder   = document.querySelector('#search-bar-dropdown-holder'); // dropdown wrapper
             const dropdownBackdrop = document.querySelector('.search-bar-backdrop'); 
-
+            const breedList        = document.querySelector('.breed-list');
+            const submitBtn        = document.querySelector('#search-submit');
 
             // show dropdown list
             inputField.addEventListener('focus', function(){
@@ -39,10 +40,54 @@ import DogApi from './DogApi';
             dropdownBackdrop.addEventListener('click', function(){
                 dropdownHolder.classList.remove('active');
             });
+
+            // add value to the input field when clicked the button
+            breedList.addEventListener('click', function(event){
+                const target = event.target;
+                
+                if(target.classList.contains('breed-list-item')) {
+                    const breed = target.dataset.breed;
+                    inputField.value = breed;
+
+                    dropdownHolder.classList.remove('active');
+                }
+
+            });
+
+            // load images for the selected breed
+            submitBtn.addEventListener('click', ()=> {
+                // remove all the list before rendering the specified breed
+                document.querySelector('.gallery-list').innerHTML = ''; 
+                this.loader.classList.remove('hidden');
+                this.loadGallery();
+            });
+
+            //append list to the dropdown
+            function generateList(breeds, container) {
+                let html = '';
+
+                for(let breed of breeds) {
+                    html += `
+                        <button data-breed="${breed}" class="list-group-item list-group-item-action breed-list-item"><span>${breed}</span></button>
+                    `;
+                }
+
+                document.querySelector(container).innerHTML = html;
+            }
+
+            dogApi.getBreedsList()
+            .then( data => {
+                
+                generateList(data.message, '.search-bar-dropdown .list-group');
+            } )
+            .catch( error => {
+                console.error(error.message);
+            })
         }
         loadGallery() {
+            const breed = document.querySelector('#search-breed-input').value == '' ? undefined: document.querySelector('#search-breed-input').value;
 
-            dogApi.getImages(12)
+            dogApi.getImages(12, breed)
             .then(images => {
                 // hide loader
                 this.loader.classList.add('hidden');
