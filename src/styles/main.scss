@@ -92,3 +92,55 @@ body {
                     display: block;
                 }
     }
+
+    /* 
+        ==========================================
+        GALLERY CONTAINER
+        ==========================================
+    */
+
+    section.main-gallery {
+
+        .main-gallery-inner {
+
+        }
+
+            .main-gallery-container {
+                min-height: 500px;
+            }
+
+                .gallery-list {
+                    display: flex;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                    font-size: 0;
+                }
+
+                    .gallery-item {
+                        display: inline-block;
+                        vertical-align: top;
+                        padding: 10px;
+                        width: calc(100% / 4);
+                    }
+
+                        .gallery-item canvas {
+                            background: {
+                                repeat: no-repeat;
+                                size: cover;
+                                position: center;
+                            }
+                            border-radius: 5px;
+                            display: block;
+                            width: 100%;
+                        }
+
+                    .gallery-loader {
+                        position: absolute;
+                        bottom: 53px;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        z-index: 5;
+                        font-size: 20px;
+                    }
+}
