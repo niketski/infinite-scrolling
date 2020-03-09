@@ -30,10 +30,44 @@ import DogApi from './DogApi';
             const dropdownBackdrop = document.querySelector('.search-bar-backdrop'); 
             const breedList        = document.querySelector('.breed-list');
             const submitBtn        = document.querySelector('#search-submit');
+            let currentBreed       = [];
+
+            //append list to the dropdown
+            function generateList(breeds, container) {
+                let html = '';
+
+                for(let breed of breeds) {
+                    html += `
+                        <button data-breed="${breed}" class="list-group-item list-group-item-action breed-list-item"><span>${breed}</span></button>
+                    `;
+                }
+
+                document.querySelector(container).innerHTML = html;
+            }
 
             // show dropdown list
             inputField.addEventListener('focus', function(){
                 dropdownHolder.classList.add('active');
+            });
+
+            // filter dropdown list
+            inputField.addEventListener('keyup', function(){
+                let inputFieldValue = inputField.value;
+                let breedArray = Array.from(currentBreed).map( item => {
+                    return item;
+                } );
+                let filteredBreed = breedArray.filter(breed => {
+                    if(breed.indexOf(inputFieldValue.trim()) > -1) {
+                        return breed;
+                    }
+                });
+                
+                if(filteredBreed.length == 0) {
+                    breedList.innerHTML = `<p class="text-center font-weight-normal">Sorry "${inputFieldValue}" does not exist <i class="fa fa-frown-o font-weight-bold" aria-hidden="true"></i></p>`;
+                    return;
+                }
+
+                generateList(filteredBreed, '.search-bar-dropdown .list-group');
             });
 
             // hide dropdown list
@@ -62,28 +96,16 @@ import DogApi from './DogApi';
                 this.loadGallery();
             });
 
-            //append list to the dropdown
-            function generateList(breeds, container) {
-                let html = '';
-
-                for(let breed of breeds) {
-                    html += `
-                        <button data-breed="${breed}" class="list-group-item list-group-item-action breed-list-item"><span>${breed}</span></button>
-                    `;
-                }
-
-                document.querySelector(container).innerHTML = html;
-            }
-
             dogApi.getBreedsList()
             .then( data => {
-                
+                currentBreed = data.message;
                 generateList(data.message, '.search-bar-dropdown .list-group');
             } )
             .catch( error => {
                 console.error(error.message);
             })
         }
+
         loadGallery() {
             const breed = document.querySelector('#search-breed-input').value == '' ? undefined: document.querySelector('#search-breed-input').value;
 
