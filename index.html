@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+<link href="./styles/app.css" rel="stylesheet"></head>
+<body>
+    <!-- banner -->
+    <section class="main-banner">
+        <div class="jumbotron text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="images/dog-main.png" alt="Dog Logo" class="dog-logo"/>
+                        <div class="banner-text">
+                            <h1 class="display-4 text-uppercase">Dogs</h1>
+                            <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end banner -->
+
+    <!-- custom search bar -->
+    <section class="search-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="#">
+
+                        <div class="search-bar-dropdown-holder" id="search-bar-dropdown-holder">
+
+                            <div class="input-group input-group-lg mb-3">
+                                <input  autocomplete="off" id="search-breed-input" type="text" class="form-control" placeholder="Search Breed" aria-label="Search Breed" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="search-submit"><em class="fa fa-paw" aria-hidden="true"></em></button>
+                                </div>
+                            </div>
+
+                            <div class="search-bar-backdrop"></div>
+                            <div class="search-bar-dropdown">
+                               <div class="list-group breed-list">
+                                  <!-- list of breed goes here -->
+                               </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end custom search bar --> 
+    
+    <!-- gallery content -->
+    <section class="main-gallery py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-gallery-inner">
+                        <div class="main-gallery-container border rounded p-5">
+                           <div class="gallery-list">
+                                <!-- list of gallery goes here -->
+                           </div>
+                           <div class="gallery-loader spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end gallery content -->
+
+<script type="text/javascript" src="app.bundle.js"></script></body>
+</html>
