@@ -47,7 +47,7 @@
     "start": "webpack-dev-server --open",
     "server": "node server.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC"
